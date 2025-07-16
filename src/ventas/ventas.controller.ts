@@ -18,16 +18,26 @@ export class VentasController {
 
   @Get('por-dia')
   obtenerVentasPorDia(@Query('fecha') fecha: string) {
-    return this.ventasService.obtenerVentasPorDia(new Date(fecha));
+    return this.ventasService.obtenerVentasPorDia(fecha);
   }
 
   @Get('por-semana')
   obtenerVentasPorSemana(@Query('fecha') fecha: string) {
-    return this.ventasService.obtenerVentasPorSemana(new Date(fecha));
+    return this.ventasService.obtenerVentasPorSemana(fecha);
   }
 
   @Get('por-producto')
   obtenerVentasPorProducto(@Query('productoId') productoId: number) {
     return this.ventasService.obtenerVentasPorProducto(Number(productoId));
+  }
+
+  @Get('por-semanas-del-mes')
+  obtenerVentasPorSemanasDelMes(@Query('mes') mes: string, @Query('anio') anio: string) {
+    return this.ventasService.obtenerVentasPorSemanasDelMes(Number(mes), Number(anio));
+  }
+
+  @Get('por-rango-fechas')
+  obtenerVentasPorRangoFechas(@Query('fechaInicio') fechaInicio: string, @Query('fechaFin') fechaFin: string) {
+    return this.ventasService.obtenerVentasPorRangoFechas(fechaInicio, fechaFin);
   }
 } 

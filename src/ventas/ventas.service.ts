@@ -33,7 +33,14 @@ export class VentasService {
       const detalle = this.detalleVentaRepositorio.create({ producto, cantidad: d.cantidad, precio: d.precio });
       detalles.push(detalle);
     }
-    const venta = this.ventaRepositorio.create({ usuario, direccion: dto.direccion, total, detalles });
+    const venta = this.ventaRepositorio.create({ usuario, direccion: dto.direccion, total, detalles, estado: 'pendiente' });
+    return this.ventaRepositorio.save(venta);
+  }
+
+  async actualizarEstadoVenta(id: number, estado: 'pendiente' | 'vendido' | 'cancelado'): Promise<Venta> {
+    const venta = await this.ventaRepositorio.findOne({ where: { id } });
+    if (!venta) throw new NotFoundException('Venta no encontrada');
+    venta.estado = estado;
     return this.ventaRepositorio.save(venta);
   }
 
@@ -127,5 +134,9 @@ export class VentasService {
       .where('venta.fecha BETWEEN :inicio AND :fin', { inicio, fin })
       .orderBy('venta.fecha', 'DESC')
       .getMany();
+  }
+
+  async obtenerVentasPorEstado(estado: 'pendiente' | 'vendido' | 'cancelado'): Promise<Venta[]> {
+    return this.ventaRepositorio.find({ where: { estado }, order: { fecha: 'DESC' } });
   }
 } 

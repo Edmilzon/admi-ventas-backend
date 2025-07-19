@@ -19,6 +19,9 @@ export class Venta {
   @CreateDateColumn()
   fecha: Date;
 
+  @Column({ default: 'pendiente' })
+  estado: 'pendiente' | 'vendido' | 'cancelado';
+
   @OneToMany(() => DetalleVenta, detalle => detalle.venta, { cascade: true, eager: true })
   detalles: DetalleVenta[];
 } 

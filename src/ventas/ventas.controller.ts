@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Patch, Param } from '@nestjs/common';
 import { VentasService } from './ventas.service';
 import { CrearVentaDto } from './dto/crear-venta.dto';
 
@@ -39,5 +39,15 @@ export class VentasController {
   @Get('por-rango-fechas')
   obtenerVentasPorRangoFechas(@Query('fechaInicio') fechaInicio: string, @Query('fechaFin') fechaFin: string) {
     return this.ventasService.obtenerVentasPorRangoFechas(fechaInicio, fechaFin);
+  }
+
+  @Get('por-estado')
+  obtenerVentasPorEstado(@Query('estado') estado: 'pendiente' | 'vendido' | 'cancelado') {
+    return this.ventasService.obtenerVentasPorEstado(estado);
+  }
+
+  @Patch(':id/estado')
+  actualizarEstadoVenta(@Param('id') id: string, @Body('estado') estado: 'pendiente' | 'vendido' | 'cancelado') {
+    return this.ventasService.actualizarEstadoVenta(Number(id), estado);
   }
 } 

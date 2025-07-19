@@ -18,6 +18,10 @@ export class AutenticacionService {
     }
     const payload = { sub: usuario.id, correo: usuario.correo };
     const token = this.jwtService.sign(payload);
-    return { token };
+
+    // Elimina la contraseña antes de enviar el usuario
+    const { contrasena, ...usuarioSinContrasena } = usuario;
+
+    return { token, usuario: usuarioSinContrasena };
   }
 } 

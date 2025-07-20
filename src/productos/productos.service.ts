@@ -37,4 +37,10 @@ export class ProductosService {
     const producto = await this.obtenerUno(id);
     await this.productoRepositorio.remove(producto);
   }
+
+  async actualizarStock(id: number, stock: number): Promise<Producto> {
+    const producto = await this.obtenerUno(id);
+    producto.stock = stock;
+    return this.productoRepositorio.save(producto);
+  }
 } 

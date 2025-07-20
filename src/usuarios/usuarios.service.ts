@@ -26,4 +26,16 @@ export class UsuariosService {
     const usuario = await this.usuarioRepositorio.findOne({ where: { correo } });
     return usuario ?? undefined;
   }
+
+  async obtenerTodos(): Promise<Omit<Usuario, 'contrasena'>[]> {
+    const usuarios = await this.usuarioRepositorio.find();
+    return usuarios.map(({ contrasena, ...rest }) => rest);
+  }
+
+  async obtenerUno(id: number): Promise<Omit<Usuario, 'contrasena'> | undefined> {
+    const usuario = await this.usuarioRepositorio.findOne({ where: { id } });
+    if (!usuario) return undefined;
+    const { contrasena, ...rest } = usuario;
+    return rest;
+  }
 } 

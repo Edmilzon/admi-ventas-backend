@@ -1,4 +1,4 @@
-import { Controller, Post, Body, BadRequestException } from '@nestjs/common';
+import { Controller, Post, Body, BadRequestException, Get, Param, NotFoundException } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CrearUsuarioDto } from './dto/crear-usuario.dto';
 
@@ -14,5 +14,17 @@ export class UsuariosController {
     }
     const usuario = await this.usuariosService.crearUsuario(datos);
     return { mensaje: 'Usuario registrado correctamente', usuario: { id: usuario.id, correo: usuario.correo, nombre: usuario.nombre } };
+  }
+
+  @Get()
+  async obtenerTodos() {
+    return this.usuariosService.obtenerTodos();
+  }
+
+  @Get(':id')
+  async obtenerUno(@Param('id') id: string) {
+    const usuario = await this.usuariosService.obtenerUno(Number(id));
+    if (!usuario) throw new NotFoundException('Usuario no encontrado');
+    return usuario;
   }
 } 

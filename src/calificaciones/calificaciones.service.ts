@@ -24,15 +24,6 @@ export class CalificacionesService {
     const producto = await this.productoRepositorio.findOne({ where: { id: productoId } });
     if (!producto) throw new NotFoundException('Producto no encontrado');
 
-    // Verificar si el usuario ya calificó este producto
-    const calificacionExistente = await this.calificacionRepositorio.findOne({
-      where: { usuario: { id: usuarioId }, producto: { id: productoId } }
-    });
-
-    if (calificacionExistente) {
-      throw new BadRequestException('Ya has calificado este producto');
-    }
-
     const calificacion = this.calificacionRepositorio.create({
       usuario,
       producto,

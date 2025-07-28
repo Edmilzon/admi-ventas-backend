@@ -1,0 +1,116 @@
+USUARIOS
+POST: https://admi-ventas-backend.onrender.com/usuarios/registro
+	{
+  "correo": "usuario@ejemplo.com",
+  "nombre": "Nombre del Usuario",
+  "contrasena": "123456",
+  "direccion": "Calle Falsa 123",
+  "telf": "123456789"
+}
+
+POST: https://admi-ventas-backend.onrender.com/usuarios/login
+
+{
+  "correo": "usuario@ejemplo.com",
+  "contrasena": "123456"
+}
+
+	Retornar token: 
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjgsImNvcnJlbyI6InVzdWFyaW9AZWplbXBsby5jb20iLCJpYXQiOjE3NTI2MzExMjAsImV4cCI6MTc1MjcxNzUyMH0.R9wKtIrLRlCiRaNJ11ZVbksr7KtoVeNR-SfCb7BpPuo"
+}
+GET: https://admi-ventas-backend.onrender.com/usuarios
+GET: https://admi-ventas-backend.onrender.com/usuarios/:id
+
+PRODUCTOS
+POST:  https://admi-ventas-backend.onrender.com/productos
+{
+  "nombre": "Producto de ejemplo",
+  "descripcion": "Descripción del producto",
+  "precio": 99.99,
+  "imagen": "https://ejemplo.com/imagen.jpg",  // Opcional
+  "stock": 10
+}
+
+GET: https://admi-ventas-backend.onrender.com/productos
+
+PUT: https://admi-ventas-backend.onrender.com/productos/{id_producto}
+{
+  "nombre": "Nuevo nombre",
+  "descripcion": "Nueva descripción",
+  "precio": 120.50,
+  "imagen": "https://ejemplo.com/nueva-imagen.jpg",
+  "stock": 15
+}
+
+DELETE: https://admi-ventas-backend.onrender.com/productos/{id_producto}
+
+PATCH: https://admi-ventas-backend.onrender.com/productos/:id/stock
+  {
+    "stock": 25
+  }
+
+VENTAS
+
+POST:  https://admi-ventas-backend.onrender.com/ventas
+{
+  "usuarioId": 6,
+  "direccion": "Calle Falsa 123",
+  "detalles": [
+    {
+      "productoId": 1,
+      "cantidad": 3,
+      "precio": 99.99
+    },
+    {
+      "productoId": 2,
+      "cantidad": 1,
+      "precio": 49.50
+    }
+  ]
+}
+
+PATCH : https://admi-ventas-backend.onrender.com/ventas/:id/estado
+ {
+    "estado": "vendido"
+  }
+
+GET: https://admi-ventas-backend.onrender.com/ventas
+GET: https://admi-ventas-backend.onrender.com/ventas/por-dia?fecha=2025-07-16
+GET: https://admi-ventas-backend.onrender.com/ventas/por-semana?fecha=2025-07-16
+GET: https://admi-ventas-backend.onrender.com/ventas/por-producto?productoId=2
+GET: https://admi-ventas-backend.onrender.com/ventas/por-semanas-del-mes?mes=7&anio=2025
+GET: https://admi-ventas-backend.onrender.com/ventas/por-rango-fechas?fechaInicio=2025-07-01&fechaFin=2025-07-16
+GET: https://admi-ventas-backend.onrender.com/ventas/por-estado?estado=pendiente
+GET: https://admi-ventas-backend.onrender.com/ventas/por-estado?estado=vendido
+GET: https://admi-ventas-backend.onrender.com/ventas/por-estado?estado=cancelado
+
+
+
+
+
+
+CALIFICACIONES
+
+POST: https://admi-ventas-backend.onrender.com/calificaciones/:productoId?usuarioId=6
+{
+  "calificacion": 5,
+  "comentario": "Excelente producto, muy recomendado!"
+}
+
+GET: https://admi-ventas-backend.onrender.com/calificaciones/producto/:productoId
+GET: https://admi-ventas-backend.onrender.com/calificaciones/usuario/:usuarioId
+GET: https://admi-ventas-backend.onrender.com/calificaciones/producto/:productoId/promedio
+
+PUT: https://admi-ventas-backend.onrender.com/calificaciones/:productoId?usuarioId=6
+{
+  "calificacion": 4,
+  "comentario": "Muy bueno, pero podría mejorar"
+}
+
+DELETE: https://admi-ventas-backend.onrender.com/calificaciones/:productoId?usuarioId=6
+
+
+
+
+

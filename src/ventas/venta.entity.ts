@@ -22,6 +22,9 @@ export class Venta {
   @Column({ default: 'pendiente' })
   estado: 'pendiente' | 'vendido' | 'cancelado';
 
+  @Column({ type: 'timestamp', nullable: true })
+  fechaEntrega: Date;
+
   @OneToMany(() => DetalleVenta, detalle => detalle.venta, { cascade: true, eager: true })
   detalles: DetalleVenta[];
 } 

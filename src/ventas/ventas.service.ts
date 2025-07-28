@@ -33,7 +33,14 @@ export class VentasService {
       const detalle = this.detalleVentaRepositorio.create({ producto, cantidad: d.cantidad, precio: d.precio });
       detalles.push(detalle);
     }
-    const venta = this.ventaRepositorio.create({ usuario, direccion: dto.direccion, total, detalles, estado: 'pendiente' });
+    const venta = this.ventaRepositorio.create({ 
+      usuario, 
+      direccion: dto.direccion, 
+      total, 
+      detalles, 
+      estado: 'pendiente',
+      fechaEntrega: dto.fechaEntrega ? new Date(dto.fechaEntrega) : undefined
+    });
     return this.ventaRepositorio.save(venta);
   }
 

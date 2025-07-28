@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsNumber, IsString, ValidateNested } from 'class-validator';
+import { IsArray, IsNotEmpty, IsNumber, IsString, ValidateNested, IsOptional, IsDateString } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class DetalleVentaDto {
@@ -24,4 +24,8 @@ export class CrearVentaDto {
   @ValidateNested({ each: true })
   @Type(() => DetalleVentaDto)
   detalles: DetalleVentaDto[];
+
+  @IsOptional()
+  @IsDateString()
+  fechaEntrega?: string;
 } 

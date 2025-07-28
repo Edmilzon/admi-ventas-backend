@@ -56,6 +56,7 @@ POST:  https://admi-ventas-backend.onrender.com/ventas
 {
   "usuarioId": 6,
   "direccion": "Calle Falsa 123",
+  "fechaEntrega": "2025-07-20T15:30:00.000Z",  // Opcional
   "detalles": [
     {
       "productoId": 1,
